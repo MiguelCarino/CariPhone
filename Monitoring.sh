@@ -1,9 +1,10 @@
 #!/bin/bash
+source generalInfo
+client=$1; technology=$2; branch_type=$3
+branch=$(hostname)
 current_date=$(date +%Y%m%d)                    # Current Date
 latest_execution=$(date +%H:%M:%S)              # Last execution time
 export inputFile="$technology.$current_date"    # Filename
-branch_type="Sitios"
-branch=$(hostname)
 
 check_file_size() {
     local filename="$1"
@@ -31,12 +32,13 @@ check_file_size() {
             echo "File '$filename' did change its filesize."
             cp /home/$(whoami)/$branch/rawdata/$inputFile /home/$(whoami)/$branch/gzraw/$inputFile
             gzip -f /home/$(whoami)/$branch/gzraw/$inputFile
-            bash /home/$(whoami)/$branch/bin/MainSFTP.sh 127.0.0.1 password
+            bash /home/$(whoami)/bin/MainSFTP.sh 127.0.0.1 password
 	    else
 	    echo "WARNING: File '$filename' did not change its filesize"
 	    nohup bash /home/$(whoami)/bin/StopCapture.sh 9002 5000 &
 	    sleep 180
-        
+        nohup bash /home/$(whoami)/bin/StartCapture.sh 9002 &
+        nohup bash /home/$(whoami)/bin/StartCapture.sh 5000 &
 	    #nohup /usr/bin/python3 /home/$(whoami)/$branch/bin/Capture.py & #Missing script (on the works)
             return 0
         fi
