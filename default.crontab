@@ -1,0 +1,16 @@
+# Standard crontab jobs
+
+# Avaya IP
+* * * * *       /home/$(whoami)/bin/Processing.sh
+*/30 * * * *    /home/$(whoami)/bin/Monitoring.sh
+2 0 * * *       /home/$(whoami)/bin/Monitoring.sh
+
+# Avaya
+
+# Cisco Call Manager
+
+# Nortel
+
+# Huawei
+
+# Panasonic
