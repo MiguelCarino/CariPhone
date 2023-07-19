@@ -1,2 +1,2 @@
 # CariPhone
-A basic listening and recording listening implementation for various IP phone techonologies
+A basic listening and recording implementation for various IP phone techonologies
